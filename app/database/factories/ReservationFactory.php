@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Activite;
+use App\Models\Entraineur;
 use App\Models\Reservation;
 use App\Models\Membre;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -25,6 +27,8 @@ class ReservationFactory extends Factory
     {
         return [
             'membre_id' => Membre::factory(),
+            'entraineur_id' => Entraineur::factory(),
+            'activite_id' => Activite::factory(),
             'date_reservation' => $this->faker->date,
             'details' => $this->faker->sentence,
         ];

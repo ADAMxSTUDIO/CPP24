@@ -10,7 +10,7 @@
           <a class="nav-link" href="{{ route('entraineurs.index') }}">Tainers</a>
           <a class="nav-link" href="{{ route('activites.index') }}">Activity</a>
           <a class="nav-link" href="{{ route('inscriptions.index') }}">Inscription</a>
-          <a class="nav-link disabled" aria-disabled="true">Reservation</a>
+          <a class="nav-link" href="{{ route('reservations.index') }}">Reservation</a>
         </div>
       </div>
     </div>

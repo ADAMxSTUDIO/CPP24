@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activite;
 use App\Models\Inscription;
+use App\Models\Membre;
 use Illuminate\Http\Request;
 
 class InscriptionController extends Controller
@@ -15,7 +17,9 @@ class InscriptionController extends Controller
 
     public function create()
     {
-        return view('inscriptions.create');
+        $membres = Membre::all();
+        $activites = Activite::all();
+        return view('inscriptions.create', compact('membres', 'activites'));
     }
 
     public function store(Request $request)
@@ -41,7 +45,9 @@ class InscriptionController extends Controller
 
     public function edit(Inscription $inscription)
     {
-        return view('inscriptions.edit', compact('inscription'));
+        $membres = Membre::all();
+        $activites = Activite::all();
+        return view('inscriptions.edit', compact('inscription', 'membres', 'activites'));
     }
 
     public function update(Request $request, Inscription $inscription)

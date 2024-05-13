@@ -57,9 +57,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/inscriptions/{inscription}/edit', [InscriptionController::class, 'edit'])->name('inscriptions.edit');
     Route::put('/inscriptions/{inscription}', [InscriptionController::class, 'update'])->name('inscriptions.update');
     Route::get('/inscriptions/{inscription}', [InscriptionController::class, 'destroy'])->name('inscriptions.destroy');
+
+    // Reservation Resource Routes
+    Route::get('/reservations', [ReservationController::class, 'index'])->name('reservations.index');
+    Route::get('/reservations/create', [ReservationController::class, 'create'])->name('reservations.create');
+    Route::post('/reservations', [ReservationController::class, 'store'])->name('reservations.store');
+    Route::get('/reservations/{reservation}/edit', [ReservationController::class, 'edit'])->name('reservations.edit');
+    Route::put('/reservations/{reservation}', [ReservationController::class, 'update'])->name('reservations.update');
+    Route::get('/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('reservations.destroy');
 });
-
-
-
-// Reservation Resource Routes
-Route::resource('reservations', ReservationController::class);

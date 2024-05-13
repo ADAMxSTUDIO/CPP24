@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activite;
+use App\Models\Entraineur;
+use App\Models\Membre;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -15,12 +18,21 @@ class ReservationController extends Controller
 
     public function create()
     {
-        return view('reservations.create');
+        $membres = Membre::all();
+        $entraineurs = Entraineur::all();
+        $activites = Activite::all();
+        return view('reservations.create', compact('membres', 'entraineurs', 'activites'));
     }
 
     public function store(Request $request)
     {
-        Reservation::create($request->all());
+        $reservation = new Reservation();
+        $reservation->membre_id = $request->membre_id;
+        $reservation->entraineur_id = $request->entraineur_id;
+        $reservation->activite_id = $request->activite_id;
+        $reservation->date_reservation = $request->date_reservation;
+        $reservation->details = $request->details;
+        $reservation->save();
         return redirect()->route('reservations.index');
     }
 
@@ -31,12 +43,21 @@ class ReservationController extends Controller
 
     public function edit(Reservation $reservation)
     {
-        return view('reservations.edit', compact('reservation'));
+        $membres = Membre::all();
+        $entraineurs = Entraineur::all();
+        $activites = Activite::all();
+        return view('reservations.edit', compact('reservation', 'activites', 'membres', 'entraineurs'));
     }
 
     public function update(Request $request, Reservation $reservation)
     {
-        $reservation->update($request->all());
+        $reservation->update([
+            'membre_id' => $request->membre_id,
+            'entraineur_id' => $request->entraineur_id,
+            'activite_id' => $request->activite_id,
+            'date_reservation' => $request->date_reservation,
+            'details' => $request->details
+        ]);
         return redirect()->route('reservations.index');
     }
 
