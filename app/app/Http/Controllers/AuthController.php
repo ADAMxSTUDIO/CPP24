@@ -23,7 +23,7 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->intended(route('membres.index'));
+            return redirect()->intended(route('dashboard'));
         } else {
             return back()->withErrors(['email' => 'The provided credentials do not match our records.'])->withInput($request->only('email'));
         }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PastEventsController;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\EntraineurController;
 use App\Http\Controllers\ActiviteController;
@@ -25,6 +26,9 @@ Route::get('/', [AuthController::class, 'showLoginForm']);
 Route::post('/', [AuthController::class, 'Login'])->name('login');
 
 Route::middleware('auth')->group(function () {
+    // Dashboard route
+    Route::get('/past-events', [PastEventsController::class, 'index'])->name('dashboard');
+
     // Membre Resource Routes
     Route::get('/membres', [MembreController::class, 'index'])->name('membres.index');
     Route::post('/membres/filter', [MembreController::class, 'index'])->name('membres.filter');
